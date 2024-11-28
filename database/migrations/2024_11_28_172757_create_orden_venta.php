@@ -15,10 +15,10 @@ return new class extends Migration
             $table->id('id_orden_venta');
             $table->double('total');
             $table->date('fecha_emision');
-            $table->unsignedBigInteger('id_cliente');
+            // $table->unsignedBigInteger('id_cliente');
 
             //Llaves Foraneas
-            $table->foreign('id_cliente')->references('id_cliente')->on('cliente')->onDelete('CASCADE');
+            // $table->foreign('id_cliente')->references('id_cliente')->on('cliente')->onDelete('CASCADE');
             // $table->unsignedBigInteger('id');
             // $table->timestamps();
         });

@@ -11,7 +11,7 @@ class Orden_Venta extends Model
     protected $table='orden_venta';
     protected $primaryKey='id_orden_venta';
     public $timestamps=false;
-    protected $fillable=['total','fecha_emision','id_cliente'];
+    protected $fillable=['total','fecha_emision'];
 
 
 
