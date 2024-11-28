@@ -37,7 +37,7 @@ class Orden_Venta_Controller extends Controller
         try{
             DB::beginTransaction();
             $orden_venta= new Orden_Venta();
-            $orden_venta->total=$request->total;
+            $orden_venta->total=$request['total'];
             $orden_venta->fecha_emision= Carbon::now();
 
             $orden_venta->save();
