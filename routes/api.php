@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Orden_Venta_Controller;
 use App\Http\Controllers\ProductoController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -20,3 +21,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::resource('productos',ProductoController::class);
+Route::post('venta',[Orden_Venta_Controller::class,'store'])->name('venta.post');

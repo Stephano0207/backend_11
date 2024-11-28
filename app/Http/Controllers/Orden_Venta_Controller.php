@@ -33,6 +33,7 @@ class Orden_Venta_Controller extends Controller
      */
     public function store(Request $request)
     {
+        // return response()->json(['response'=>$request->details_venta],200);
         try{
             DB::beginTransaction();
             $orden_venta= new Orden_Venta();
@@ -41,14 +42,15 @@ class Orden_Venta_Controller extends Controller
 
             $orden_venta->save();
 
-            $orden_venta->saveDetails($request->detalles,$orden_venta->id_orden_venta);
+            $orden_venta->saveDetails($request->details_venta,$orden_venta->id_orden_venta);
 
             DB::commit();
             return response()->json(['response'=>true],200);
 
         }catch(Exception $ex){
             DB::rollBack();
-            return response()->json(['response'=>false],500);
+            \Log::error('Error en la transacción: ' . $ex->getMessage());
+            return response()->json(['response'=>false,'mensaje'=>$ex->getMessage()],500);
         }
 
 

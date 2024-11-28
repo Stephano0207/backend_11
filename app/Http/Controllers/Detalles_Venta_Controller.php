@@ -11,9 +11,7 @@ class Detalles_Venta_Controller extends Controller
      */
     public function index()
     {
-        $clientes=Cliente::all();
 
-        return response()->json($clientes);
     }
 
     /**
