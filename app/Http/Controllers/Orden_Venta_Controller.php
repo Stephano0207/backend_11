@@ -59,6 +59,15 @@ class Orden_Venta_Controller extends Controller
 
     }
 
+
+    public function obtenerMonto(Request $request){
+        $monto= Orden_Venta::selectRaw('MONTHNAME(fecha_emision) as MES, sum(total) as MONTO')
+        ->whereBetween('fecha_emision', ["$request->fechaInicio", "$request->fechaFin"])
+        ->groupBy('MES')
+        ->get();
+       return  response()->json(['response'=>$monto,200]);
+    }
+
     /**
      * Display the specified resource.
      */

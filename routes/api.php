@@ -22,3 +22,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::resource('productos',ProductoController::class);
 Route::post('venta',[Orden_Venta_Controller::class,'store'])->name('venta.post');
+Route::post('venta/reporte',[Orden_Venta_Controller::class,'obtenerMonto'])->name('venta.reporte');
