@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Orden_Venta;
+use DB;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 
 class Orden_Venta_Controller extends Controller
 {
@@ -12,9 +15,9 @@ class Orden_Venta_Controller extends Controller
      */
     public function index()
     {
-        $ordennes_ventas=Orden_Venta::all();
+        $ordenes_venta=Orden_Venta::all();
 
-        return response()->json($ordennes_ventas);
+        return response()->json($ordenes_venta);
     }
 
     /**
@@ -30,7 +33,28 @@ class Orden_Venta_Controller extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try{
+            DB::beginTransaction();
+            $orden_venta= new Orden_Venta();
+            $orden_venta->total=$request->total;
+            $orden_venta->fecha_emision= Carbon::now();
+
+            $orden_venta->save();
+
+            $orden_venta->saveDetails($request->detalles,$orden_venta->id_orden_venta);
+
+            DB::commit();
+            return response()->json(['response'=>true],200);
+
+        }catch(Exception $ex){
+            DB::rollBack();
+            return response()->json(['response'=>false],500);
+        }
+
+
+
+
+
     }
 
     /**

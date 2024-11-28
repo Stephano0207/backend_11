@@ -14,6 +14,16 @@ class Orden_Venta extends Model
     protected $fillable=['total','fecha_emision'];
 
 
+    public function saveDetails($detalles,$id){
+
+        foreach($detalles as $d){
+            $new_d= new Detalles_Orden_Venta();
+            $new_d->id_orden_venta= $id;
+            $new_d->id_producto= $d->id;
+            $new_d->cantidad=$d->cantidad;
+            $new_d->save();
+        }
+    }
 
 
 }
